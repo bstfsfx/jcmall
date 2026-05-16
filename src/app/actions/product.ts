@@ -24,6 +24,7 @@ const MOCK_PRODUCTS = [
       name: 'Women',
       slug: 'women',
       description: null,
+      image: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
@@ -43,6 +44,7 @@ const MOCK_PRODUCTS = [
       name: 'Men',
       slug: 'men',
       description: null,
+      image: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
