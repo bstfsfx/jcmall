@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import Toast from '@/components/ui/Toast';
 
 export type CartItem = {
   id: string; // usually variant id
@@ -28,6 +29,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -59,6 +61,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...currentItems, newItem];
     });
+    setToastMessage(`ITEM ADDED TO CART ✓`);
   };
 
   const removeItem = (id: string) => {
@@ -91,6 +94,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       {children}
+      {toastMessage && (
+        <Toast 
+          message={toastMessage} 
+          onClose={() => setToastMessage(null)} 
+        />
+      )}
     </CartContext.Provider>
   );
 }
