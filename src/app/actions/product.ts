@@ -143,9 +143,9 @@ export async function getCategories(): Promise<Category[]> {
   } catch (error) {
     console.error('Failed to fetch categories, returning mock data.', error);
     return [
-      { id: 'mock-cat-men', name: 'Men', slug: 'men', description: null, createdAt: new Date(), updatedAt: new Date() },
-      { id: 'mock-cat-women', name: 'Women', slug: 'women', description: null, createdAt: new Date(), updatedAt: new Date() },
-      { id: 'mock-cat-acc', name: 'Accessories', slug: 'accessories', description: null, createdAt: new Date(), updatedAt: new Date() },
+      { id: 'mock-cat-men', name: 'Men', slug: 'men', description: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+      { id: 'mock-cat-women', name: 'Women', slug: 'women', description: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+      { id: 'mock-cat-acc', name: 'Accessories', slug: 'accessories', description: null, image: null, createdAt: new Date(), updatedAt: new Date() },
     ];
   }
 }
@@ -158,9 +158,9 @@ export async function getCategoryBySlug(slug: string): Promise<Category | null> 
     
     if (!category) {
       const mock = [
-        { id: 'mock-cat-men', name: 'Men', slug: 'men', description: null, createdAt: new Date(), updatedAt: new Date() },
-        { id: 'mock-cat-women', name: 'Women', slug: 'women', description: null, createdAt: new Date(), updatedAt: new Date() },
-        { id: 'mock-cat-acc', name: 'Accessories', slug: 'accessories', description: null, createdAt: new Date(), updatedAt: new Date() },
+        { id: 'mock-cat-men', name: 'Men', slug: 'men', description: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+        { id: 'mock-cat-women', name: 'Women', slug: 'women', description: null, image: null, createdAt: new Date(), updatedAt: new Date() },
+        { id: 'mock-cat-acc', name: 'Accessories', slug: 'accessories', description: null, image: null, createdAt: new Date(), updatedAt: new Date() },
       ];
       return mock.find(m => m.slug === slug) || null;
     }
