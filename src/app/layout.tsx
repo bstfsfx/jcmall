@@ -3,7 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
-import CartIcon from "@/components/CartIcon";
+import Header from "@/components/layout/Header";
 import { auth } from "@/auth";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -26,30 +26,7 @@ export default async function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans" suppressHydrationWarning>
         <CartProvider>
-          <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-gray-200">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-              <Link href="/" className="text-2xl font-serif font-bold tracking-widest">JC MALL</Link>
-              <nav className="hidden md:flex gap-8">
-                <Link href="/shop" className="text-sm font-medium hover:text-accent transition-colors">SHOP</Link>
-                <Link href="/shop/women" className="text-sm font-medium hover:text-accent transition-colors">WOMEN</Link>
-                <Link href="/shop/men" className="text-sm font-medium hover:text-accent transition-colors">MEN</Link>
-                <Link href="/about" className="text-sm font-medium hover:text-accent transition-colors">ABOUT</Link>
-              </nav>
-              <div className="flex items-center gap-4">
-                {session?.user ? (
-                  <Link href="/account" className="text-sm font-medium hover:text-accent transition-colors">
-                    {session.user.name?.split(" ")[0] ?? "Account"}
-                  </Link>
-                ) : (
-                  <Link href="/login" className="text-sm font-medium hover:text-accent transition-colors">
-                    Sign In
-                  </Link>
-                )}
-                <CartIcon />
-              </div>
-            </div>
-          </header>
-
+          <Header session={session} />
           <main className="flex-grow">{children}</main>
 
           <footer className="bg-foreground text-white py-12">

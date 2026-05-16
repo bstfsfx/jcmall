@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProducts, getCategories } from "@/app/actions/product";
+import Hero from "@/components/Hero";
 
 export default async function Home() {
   const [products, categories] = await Promise.all([
@@ -11,46 +12,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section with Parallax Effect (CSS based for now) */}
-      <section className="relative h-screen flex items-center justify-center bg-gray-100 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&q=80" 
-            alt="JC mall Fashion Hero"
-            className="w-full h-full object-cover transition-transform duration-[10000ms] hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-        
-        <div className="relative z-10 text-center text-white px-4">
-          <p className="text-xs tracking-[0.3em] uppercase mb-4 opacity-90 font-medium">2026 Summer / Autumn Collection</p>
-          <h1 className="text-6xl md:text-8xl font-serif mb-8 tracking-widest drop-shadow-2xl">
-            品味<em>永恆</em>風尚
-          </h1>
-          <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light drop-shadow-sm leading-relaxed opacity-90">
-            Discover our curated collection of luxury fashion, designed for those who appreciate elegance and craftsmanship.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/shop"
-              className="inline-block bg-white text-foreground px-10 py-4 text-sm font-semibold tracking-[0.2em] hover:bg-gray-100 transition-all duration-300 shadow-xl"
-            >
-              SHOP COLLECTION
-            </Link>
-            <Link
-              href="/shop/new-arrivals"
-              className="inline-block border border-white text-white px-10 py-4 text-sm font-semibold tracking-[0.2em] hover:bg-white hover:text-foreground transition-all duration-300"
-            >
-              EXPLORE MORE
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce opacity-70">
-          <div className="w-[1px] h-12 bg-white" />
-        </div>
-      </section>
+      <Hero />
 
       {/* Featured Categories */}
       <section className="py-32 bg-background">
