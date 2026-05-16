@@ -31,58 +31,54 @@ export default function Header({ session }: HeaderProps) {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         isScrolled 
-          ? 'bg-background/80 backdrop-blur-lg border-b border-gray-200 py-3 shadow-sm' 
-          : 'bg-transparent py-6'
+          ? 'bg-[#0a0a0a]/90 backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl' 
+          : 'bg-transparent py-8'
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="container mx-auto px-8 flex items-center justify-between">
         <Link 
           href="/" 
-          className={`text-2xl font-serif font-bold tracking-[0.3em] transition-colors ${
-            !isScrolled && pathname === '/' ? 'text-white' : 'text-foreground'
-          }`}
+          className="text-2xl md:text-3xl font-serif font-light tracking-[0.4em] transition-all hover:text-gold text-white"
         >
           JC MALL
         </Link>
         
-        <nav className="hidden md:flex gap-10">
+        <nav className="hidden lg:flex gap-12">
           {navLinks.map((link) => (
             <Link 
               key={link.name}
               href={link.href} 
-              className={`text-[10px] tracking-[0.3em] font-semibold transition-all hover:text-accent relative group ${
-                !isScrolled && pathname === '/' ? 'text-white/90' : 'text-foreground/80'
+              className={`text-[10px] tracking-[0.4em] font-ui font-bold transition-all hover:text-white relative group ${
+                pathname === link.href ? 'text-gold' : 'text-[#9a958e]'
               }`}
             >
               {link.name}
-              <span className={`absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full`} />
+              <span className={`absolute -bottom-2 left-0 w-0 h-[1px] bg-gold transition-all duration-500 group-hover:w-full ${
+                pathname === link.href ? 'w-full' : ''
+              }`} />
             </Link>
           ))}
         </nav>
         
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           {session?.user ? (
             <Link 
               href="/account" 
-              className={`text-[10px] tracking-[0.2em] font-semibold transition-colors hover:text-accent ${
-                !isScrolled && pathname === '/' ? 'text-white' : 'text-foreground'
-              }`}
+              className="text-[10px] tracking-[0.3em] font-ui font-bold text-[#9a958e] hover:text-white transition-colors"
             >
               {session.user.name?.split(" ")[0]?.toUpperCase() ?? "ACCOUNT"}
             </Link>
           ) : (
             <Link 
               href="/login" 
-              className={`text-[10px] tracking-[0.2em] font-semibold transition-colors hover:text-accent ${
-                !isScrolled && pathname === '/' ? 'text-white' : 'text-foreground'
-              }`}
+              className="text-[10px] tracking-[0.3em] font-ui font-bold text-[#9a958e] hover:text-white transition-colors"
             >
               SIGN IN
             </Link>
           )}
-          <div className={`${!isScrolled && pathname === '/' ? 'text-white' : 'text-foreground'}`}>
+          <div className="text-white hover:text-gold transition-colors">
             <CartIcon />
           </div>
         </div>
