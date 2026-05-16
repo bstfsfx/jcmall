@@ -29,8 +29,8 @@ const outfit = Outfit({
   display: 'swap',
 });
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return {
@@ -39,14 +39,12 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default async function RootLayout({
-  children,
-  params
-}: Readonly<{
+export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: { locale: string };
-}>) {
-  const { locale } = await params;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await props.params;
+  const { children } = props;
   const session = await auth();
 
   // Validate that the incoming `locale` parameter is valid

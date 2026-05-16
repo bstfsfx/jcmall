@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import AddToCartButton from './AddToCartButton';
+import { useTranslations, useLocale } from 'next-intl';
 
 type ProductFormProps = {
   product: {
@@ -15,6 +16,8 @@ type ProductFormProps = {
 export default function ProductForm({ product }: ProductFormProps) {
   const [selectedSize, setSelectedSize] = useState('M');
   const [selectedColor, setSelectedColor] = useState('black');
+  const t = useTranslations('Product');
+  const locale = useLocale();
 
   const colors = [
     { id: 'black', class: 'bg-black' },
@@ -23,18 +26,20 @@ export default function ProductForm({ product }: ProductFormProps) {
   ];
 
   return (
-    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+    <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
       {/* Color Selection */}
       <div>
-        <h3 className="text-sm font-medium mb-3">Color</h3>
-        <div className="flex gap-3">
+        <h3 className="text-[10px] tracking-[3px] uppercase font-bold text-white/40 mb-4">
+          {locale === 'zh' ? '選擇顏色 / Color' : 'Color'}
+        </h3>
+        <div className="flex gap-4">
           {colors.map((color) => (
             <button
               key={color.id}
               type="button"
               onClick={() => setSelectedColor(color.id)}
-              className={`w-10 h-10 rounded-full ${color.class} focus:outline-none ring-2 ring-offset-2 transition-all ${
-                selectedColor === color.id ? 'ring-accent' : 'ring-transparent'
+              className={`w-10 h-10 rounded-full ${color.class} focus:outline-none ring-1 ring-offset-4 ring-offset-[#0a0a0a] transition-all duration-300 ${
+                selectedColor === color.id ? 'ring-gold scale-110' : 'ring-white/10'
               }`}
               aria-label={`Select ${color.id}`}
             />
@@ -44,20 +49,24 @@ export default function ProductForm({ product }: ProductFormProps) {
 
       {/* Size Selection */}
       <div>
-        <div className="flex justify-between items-center mb-3">
-          <h3 className="text-sm font-medium">Size</h3>
-          <button type="button" className="text-sm text-gray-500 underline">Size Guide</button>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-[10px] tracking-[3px] uppercase font-bold text-white/40">
+            {locale === 'zh' ? '選擇尺寸 / Size' : 'Size'}
+          </h3>
+          <button type="button" className="text-[10px] tracking-[2px] uppercase font-bold text-gold/60 hover:text-gold transition-colors">
+            {locale === 'zh' ? '尺寸指南' : 'Size Guide'}
+          </button>
         </div>
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-4">
           {['S', 'M', 'L', 'XL'].map((size) => (
             <button
               key={size}
               type="button"
               onClick={() => setSelectedSize(size)}
-              className={`border py-3 text-sm transition-colors ${
+              className={`border py-4 text-[10px] font-bold tracking-[2px] transition-all duration-300 rounded-sm ${
                 selectedSize === size
-                  ? 'border-foreground bg-foreground text-white'
-                  : 'border-gray-300 hover:border-foreground'
+                  ? 'border-gold bg-gold text-black shadow-lg shadow-gold/20'
+                  : 'border-white/10 text-[#5a5650] hover:border-white/40 hover:text-white'
               }`}
             >
               {size}
@@ -67,7 +76,7 @@ export default function ProductForm({ product }: ProductFormProps) {
       </div>
 
       {/* Action Buttons */}
-      <div className="pt-6">
+      <div className="pt-10 flex flex-col gap-6">
         <AddToCartButton 
           product={product} 
           selectedSize={selectedSize} 
@@ -75,9 +84,9 @@ export default function ProductForm({ product }: ProductFormProps) {
         />
         <button
           type="button"
-          className="w-full border border-foreground text-foreground py-4 font-semibold tracking-wider hover:bg-gray-50 transition-colors"
+          className="w-full border border-white/20 text-white py-5 text-[10px] font-bold tracking-[4px] uppercase hover:bg-white hover:text-black transition-all duration-500 rounded-sm"
         >
-          FAVORITE
+          {locale === 'zh' ? '加入願望清單 / FAVORITE' : 'ADD TO FAVORITES'}
         </button>
       </div>
     </form>

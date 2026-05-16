@@ -2,6 +2,7 @@
 
 import { useCart } from './CartProvider';
 import { useState } from 'react';
+import { useLocale } from 'next-intl';
 
 type AddToCartButtonProps = {
   product: {
@@ -17,6 +18,7 @@ type AddToCartButtonProps = {
 export default function AddToCartButton({ product, selectedSize, selectedColor }: AddToCartButtonProps) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
+  const locale = useLocale();
 
   const handleAdd = () => {
     // Basic variant ID generation for cart
@@ -41,11 +43,15 @@ export default function AddToCartButton({ product, selectedSize, selectedColor }
     <button
       type="button"
       onClick={handleAdd}
-      className={`w-full py-4 font-semibold tracking-wider transition-colors mb-4 ${
-        added ? 'bg-green-600 text-white' : 'bg-foreground text-white hover:bg-[#333]'
+      className={`w-full py-6 text-[10px] font-bold tracking-[4px] uppercase transition-all duration-500 rounded-sm shadow-2xl ${
+        added 
+          ? 'bg-green-600 text-white' 
+          : 'bg-gold text-black hover:bg-gold-light'
       }`}
     >
-      {added ? 'ADDED TO CART' : 'ADD TO CART'}
+      {added 
+        ? (locale === 'zh' ? '已加入購物車 / ADDED' : 'ADDED TO CART') 
+        : (locale === 'zh' ? '加入購物車 / ADD TO CART' : 'ADD TO CART')}
     </button>
   );
 }

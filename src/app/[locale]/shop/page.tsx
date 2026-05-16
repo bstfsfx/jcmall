@@ -1,20 +1,20 @@
 import Link from "next/link";
 import { getProducts } from "@/actions/product";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { useTranslations, useLocale } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export default async function ShopPage({
   searchParams,
   params
 }: {
   searchParams: Promise<{ q?: string }>;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   const { q: query } = await searchParams;
   const { locale } = await params;
   const products = await getProducts(query);
-  const t = await useTranslations('Shop');
-  const pT = await useTranslations('Product');
+  const t = await getTranslations('Shop');
+  const pT = await getTranslations('Product');
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0a]">

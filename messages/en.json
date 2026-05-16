@@ -83,5 +83,9 @@
     "shipping": "Shipping",
     "total": "Total",
     "checkout": "Proceed to Checkout"
+  },
+  "Metadata": {
+    "title": "JC Mall | Premium Fashion Destination",
+    "description": "Experience high-end fashion and sustainable luxury at JC Mall."
   }
 }

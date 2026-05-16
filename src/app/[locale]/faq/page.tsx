@@ -1,8 +1,9 @@
 'use client';
 
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import { useLocale } from 'next-intl';
 
-const FAQS = [
+const FAQS_ZH = [
   {
     category: "訂單與付款",
     questions: [
@@ -44,15 +45,60 @@ const FAQS = [
   }
 ];
 
+const FAQS_EN = [
+  {
+    category: "Orders & Payment",
+    questions: [
+      {
+        q: "How can I check my order status?",
+        a: "You can log in to your JC mall account and view it on the \"My Orders\" page. We will also notify you by email when the order is shipped."
+      },
+      {
+        q: "What payment methods are accepted?",
+        a: "We accept major credit cards like Visa, MasterCard, and American Express, as well as Apple Pay, Google Pay, and LINE Pay."
+      }
+    ]
+  },
+  {
+    category: "Shipping & Delivery",
+    questions: [
+      {
+        q: "How long does delivery take?",
+        a: "Standard shipping typically arrives within 3-5 business days. International orders may take 7-14 business days, depending on the destination and customs process."
+      },
+      {
+        q: "How is shipping calculated?",
+        a: "Free shipping is offered on single orders over $3,000. Orders under this amount will be charged a standard shipping fee of $150."
+      }
+    ]
+  },
+  {
+    category: "Returns & Exchanges",
+    questions: [
+      {
+        q: "Can I return or exchange items?",
+        a: "Yes, all items (excluding intimate apparel and some promotional items) are eligible for a 30-day satisfaction period. Please ensure tags are intact and items are unused."
+      },
+      {
+        q: "How do I process a return?",
+        a: "Please contact our customer service team or submit a return request through your account page. We will arrange for a courier to pick up the item."
+      }
+    ]
+  }
+];
+
 export default function FAQPage() {
+  const locale = useLocale();
+  const faqs = locale === 'zh' ? FAQS_ZH : FAQS_EN;
+
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0a]">
       {/* Page Hero */}
       <section className="bg-[#111111] border-b border-white/5 py-24">
         <div className="container mx-auto px-6 text-center">
           <Breadcrumbs items={[{ label: 'FAQ' }]} />
-          <p className="text-gold text-[10px] tracking-[5px] uppercase mb-4 font-bold">常見問題</p>
-          <h1 className="text-5xl md:text-7xl font-serif font-light text-white tracking-tight">常見問題解答</h1>
+          <p className="text-gold text-[10px] tracking-[5px] uppercase mb-4 font-bold">{locale === 'zh' ? '常見問題' : 'SUPPORT'}</p>
+          <h1 className="text-5xl md:text-7xl font-serif font-light text-white tracking-tight">{locale === 'zh' ? '常見問題解答' : 'Frequently Asked Questions'}</h1>
           <div className="w-16 h-[1px] bg-gold mx-auto mt-8 opacity-60" />
         </div>
       </section>
@@ -60,7 +106,7 @@ export default function FAQPage() {
       <section className="py-32">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="space-y-24">
-            {FAQS.map((cat, idx) => (
+            {faqs.map((cat, idx) => (
               <div key={idx} className="reveal visible">
                 <h2 className="text-gold text-[10px] tracking-[4px] uppercase font-bold mb-12 border-b border-white/5 pb-4">{cat.category}</h2>
                 <div className="space-y-4">
@@ -81,12 +127,12 @@ export default function FAQPage() {
           </div>
 
           <div className="mt-32 text-center reveal visible">
-            <p className="text-[#5a5650] mb-8 italic">還有其他問題嗎？</p>
+            <p className="text-[#5a5650] mb-8 italic">{locale === 'zh' ? '還有其他問題嗎？' : 'Still have questions?'}</p>
             <a 
-              href="/contact" 
+              href={`/${locale}/contact`}
               className="inline-block bg-gold text-black px-12 py-5 text-[10px] font-bold tracking-[4px] uppercase hover:bg-gold-light transition-all duration-300"
             >
-              聯繫客服中心
+              {locale === 'zh' ? '聯繫客服中心' : 'Contact Support Center'}
             </a>
           </div>
         </div>

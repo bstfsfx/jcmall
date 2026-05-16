@@ -3,12 +3,16 @@ import { notFound } from "next/navigation";
 import { getProductsByCategory, getCategoryBySlug } from "@/actions/product";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
+import { getLocale, getTranslations } from "next-intl/server";
+
 export default async function CategoryPage({
   params,
 }: {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string; locale: string }>;
 }) {
-  const { category: categorySlug } = await params;
+  const { category: categorySlug, locale } = await params;
+  const t = await getTranslations('Shop');
+  const pT = await getTranslations('Product');
   const [products, category] = await Promise.all([
     getProductsByCategory(categorySlug),
     getCategoryBySlug(categorySlug),
@@ -21,7 +25,7 @@ export default async function CategoryPage({
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0a]">
       <div className="container mx-auto px-6">
-        <Breadcrumbs items={[{ label: 'SHOP', href: '/shop' }, { label: (category?.name || categorySlug).toUpperCase() }]} />
+        <Breadcrumbs items={[{ label: 'SHOP', href: `/${locale}/shop` }, { label: (category?.name || categorySlug).toUpperCase() }]} />
         
         <div className="mb-20 text-left reveal visible">
           <p className="text-gold text-[10px] tracking-[5px] uppercase mb-4 font-bold">Category</p>
@@ -36,7 +40,7 @@ export default async function CategoryPage({
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-32">
           {products.map((product) => (
-            <Link href={`/product/${product.slug}`} key={product.id} className="group flex flex-col bg-[#161616] border border-[#2a2725] rounded-sm overflow-hidden hover:border-[#3a3735] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <Link href={`/${locale}/product/${product.slug}`} key={product.id} className="group flex flex-col bg-[#161616] border border-[#2a2725] rounded-sm overflow-hidden hover:border-[#3a3735] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
               <div className="aspect-[3/4] relative overflow-hidden">
                  {product.images[0] ? (
                    <img 
@@ -51,7 +55,7 @@ export default async function CategoryPage({
                  
                  <div className="absolute bottom-6 left-0 right-0 px-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 z-30">
                     <button className="bg-white text-black px-8 py-4 text-[10px] font-bold tracking-[3px] w-full shadow-2xl hover:bg-gold transition-colors uppercase">
-                      查看詳情
+                      {pT('viewDetails')}
                     </button>
                  </div>
               </div>
@@ -68,9 +72,9 @@ export default async function CategoryPage({
         
         {products.length === 0 && (
           <div className="py-32 text-center">
-            <p className="text-[#5a5650] text-lg font-light italic">此分類目前沒有商品。</p>
-            <Link href="/shop" className="inline-block mt-8 text-gold text-[10px] tracking-[4px] uppercase font-bold border-b border-gold/30 pb-2">
-              返回商店中心 →
+            <p className="text-[#5a5650] text-lg font-light italic">{locale === 'zh' ? '此分類目前沒有商品。' : 'No products available in this category.'}</p>
+            <Link href={`/${locale}/shop`} className="inline-block mt-8 text-gold text-[10px] tracking-[4px] uppercase font-bold border-b border-gold/30 pb-2">
+              {locale === 'zh' ? '返回商店中心 →' : 'Return to Shop →'}
             </Link>
           </div>
         )}

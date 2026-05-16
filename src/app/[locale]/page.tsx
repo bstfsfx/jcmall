@@ -2,19 +2,19 @@ import Link from "next/link";
 import { getProducts, getCategories } from "@/actions/product";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
-import { useTranslations, useLocale } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export default async function Home() {
+export default async function Home(props: { params: Promise<{ locale: string }> }) {
+  const { locale } = await props.params;
   const [products, categories] = await Promise.all([
     getProducts(),
     getCategories(),
   ]);
 
   const featuredProducts = products.slice(0, 8);
-  const t = await useTranslations('Home');
-  const navT = await useTranslations('Nav');
-  const cartT = await useTranslations('Cart');
-  const locale = await useLocale();
+  const t = await getTranslations('Home');
+  const navT = await getTranslations('Nav');
+  const cartT = await getTranslations('Cart');
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0a]">
