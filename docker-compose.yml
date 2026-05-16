@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8001:80"
+    volumes:
+      - .:/var/www/html/jcmall
+    environment:
+      - DB_HOST=db
+      - SITE_URL=http://localhost:8001/jcmall
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=mall
+    ports:
+      - "3306:3306"
