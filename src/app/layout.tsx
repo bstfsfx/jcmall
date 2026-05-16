@@ -61,7 +61,7 @@ export default async function RootLayout({
                 </ul>
               </div>
               <div>
-                <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">客戶服務 / SUPPORT</h4>
+                <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">顧客服務 / SUPPORT</h4>
                 <ul className="space-y-4 text-[10px] tracking-[2px] font-ui font-bold text-[#5a5650] uppercase">
                   <li><Link href="/about" className="hover:text-gold transition-all hover:pl-2 block">關於我們</Link></li>
                   <li><Link href="/contact" className="hover:text-gold transition-all hover:pl-2 block">聯繫我們</Link></li>

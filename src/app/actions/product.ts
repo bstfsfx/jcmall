@@ -49,9 +49,15 @@ const MOCK_PRODUCTS = [
   }
 ];
 
-export async function getProducts(): Promise<ProductWithCategory[]> {
+export async function getProducts(query?: string): Promise<ProductWithCategory[]> {
   try {
     const products = await prisma.product.findMany({
+      where: query ? {
+        OR: [
+          { name: { contains: query, mode: 'insensitive' } },
+          { description: { contains: query, mode: 'insensitive' } },
+        ]
+      } : {},
       include: {
         category: true,
       },
@@ -60,8 +66,15 @@ export async function getProducts(): Promise<ProductWithCategory[]> {
       },
     });
 
-    if (products.length === 0) {
+    if (products.length === 0 && !query) {
       return MOCK_PRODUCTS;
+    }
+    
+    if (products.length === 0 && query) {
+      return MOCK_PRODUCTS.filter(p => 
+        p.name.toLowerCase().includes(query.toLowerCase()) || 
+        p.description.toLowerCase().includes(query.toLowerCase())
+      );
     }
 
     return products;

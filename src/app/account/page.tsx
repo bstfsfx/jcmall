@@ -1,6 +1,7 @@
-import { auth } from "@/auth";
+import { auth, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export default async function AccountPage() {
   const session = await auth();
@@ -10,77 +11,98 @@ export default async function AccountPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-16 max-w-6xl">
-      <h1 className="text-4xl font-serif mb-12">My Account</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Sidebar */}
-        <aside className="col-span-1">
-          <div className="bg-gray-50 p-6 border border-gray-100 mb-6">
-            <p className="font-medium text-lg">{session.user.name}</p>
-            <p className="text-sm text-gray-500">{session.user.email}</p>
-          </div>
-          <nav className="space-y-2 text-sm font-medium">
-            <Link href="/account" className="block px-4 py-2 bg-foreground text-white">
-              Profile
-            </Link>
-            <Link href="/account/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
-              Orders
-            </Link>
-            <Link href="/account/settings" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
-              Settings
-            </Link>
-            <form action={async () => {
-              "use server";
-              const { signOut } = await import("@/auth");
-              await signOut({ redirectTo: "/" });
-            }}>
-              <button type="submit" className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
-                Logout
-              </button>
-            </form>
-          </nav>
-        </aside>
+    <div className="flex flex-col min-h-screen bg-[#0a0a0a]">
+      <div className="container mx-auto px-6">
+        <Breadcrumbs items={[{ label: 'MY ACCOUNT' }]} />
+        
+        <div className="mb-20 reveal visible">
+          <p className="text-gold text-[10px] tracking-[5px] uppercase mb-4 font-bold">Personal Dashboard</p>
+          <h1 className="text-5xl md:text-7xl font-serif font-light text-white tracking-tight">會員中心</h1>
+          <div className="w-16 h-[1px] bg-gold mt-8" />
+        </div>
 
-        {/* Main Content */}
-        <div className="col-span-3">
-          <div className="bg-white border border-gray-100 p-8">
-            <h2 className="text-2xl font-serif mb-6">Profile Information</h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    defaultValue={session.user.name ?? ""}
-                    className="w-full border border-gray-300 px-4 py-3 focus:outline-none focus:border-foreground"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <input
-                    type="email"
-                    defaultValue={session.user.email ?? ""}
-                    readOnly
-                    className="w-full border border-gray-200 px-4 py-3 bg-gray-50 text-gray-500 cursor-not-allowed"
-                  />
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="bg-foreground text-white px-8 py-3 font-semibold tracking-wider hover:bg-[#333] transition-colors"
-              >
-                SAVE CHANGES
-              </button>
-            </form>
-          </div>
-
-          {/* Recent Orders Snapshot */}
-          <div className="mt-8 bg-white border border-gray-100 p-8">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-serif">Recent Orders</h2>
-              <Link href="/account/orders" className="text-sm text-accent underline">View all</Link>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-16 pb-32">
+          {/* Sidebar */}
+          <aside className="lg:col-span-1 space-y-12">
+            <div className="bg-[#161616] border border-[#2a2725] p-10 rounded-sm group relative overflow-hidden">
+               <div className="absolute -top-4 -right-4 font-serif text-6xl text-gold/5 pointer-events-none select-none italic group-hover:text-gold/10 transition-all duration-700">A</div>
+               <p className="text-white font-serif text-2xl mb-2">{session.user.name}</p>
+               <p className="text-[#5a5650] text-[10px] tracking-[2px] uppercase">{session.user.email}</p>
             </div>
-            <p className="text-gray-500 text-sm">No orders yet. <Link href="/shop" className="underline hover:text-foreground">Start shopping</Link>.</p>
+            
+            <nav className="flex flex-col gap-4 text-[10px] tracking-[3px] font-bold uppercase">
+              <Link href="/account" className="px-8 py-5 bg-gold text-black rounded-sm shadow-2xl">
+                基本資料 / Profile
+              </Link>
+              <Link href="/account/orders" className="px-8 py-5 bg-[#111111] border border-[#2a2725] text-[#9a958e] hover:text-white hover:border-white/20 transition-all rounded-sm">
+                我的訂單 / Orders
+              </Link>
+              <Link href="/account/settings" className="px-8 py-5 bg-[#111111] border border-[#2a2725] text-[#9a958e] hover:text-white hover:border-white/20 transition-all rounded-sm">
+                帳號設定 / Settings
+              </Link>
+              <form action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/" });
+              }}>
+                <button type="submit" className="w-full text-left px-8 py-5 bg-[#111111] border border-[#2a2725] text-[#9a958e] hover:text-white hover:border-white/20 transition-all rounded-sm">
+                  登出系統 / Logout
+                </button>
+              </form>
+            </nav>
+          </aside>
+
+          {/* Main Content */}
+          <div className="lg:col-span-3 space-y-16">
+            <div className="bg-[#111111] border border-[#2a2725] p-12 rounded-sm relative group overflow-hidden">
+              <div className="absolute top-0 right-0 p-12 font-serif text-8xl text-gold/5 pointer-events-none select-none italic group-hover:text-gold/10 transition-all duration-700">P</div>
+              <h2 className="text-3xl font-serif text-white mb-10 pb-6 border-b border-white/5">基本資料 / Profile</h2>
+              
+              <form className="space-y-10 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="flex flex-col gap-3">
+                    <label className="text-[10px] tracking-[3px] uppercase font-bold text-white/40">真實姓名 / Full Name</label>
+                    <input
+                      type="text"
+                      defaultValue={session.user.name ?? ""}
+                      className="bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-gold transition-colors text-white font-ui"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <label className="text-[10px] tracking-[3px] uppercase font-bold text-white/40">電子郵件 / Email</label>
+                    <input
+                      type="email"
+                      defaultValue={session.user.email ?? ""}
+                      readOnly
+                      className="bg-transparent border-b border-white/5 py-3 text-[#5a5650] cursor-not-allowed font-ui"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="bg-[#161616] border border-[#2a2725] text-white px-12 py-5 text-[10px] font-bold tracking-[4px] uppercase hover:bg-gold hover:text-black hover:border-gold transition-all duration-500 shadow-xl"
+                  >
+                    儲存變更 / SAVE CHANGES
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            {/* Recent Orders Snapshot */}
+            <div className="bg-[#111111] border border-[#2a2725] p-12 rounded-sm relative group overflow-hidden">
+              <div className="absolute top-0 right-0 p-12 font-serif text-8xl text-gold/5 pointer-events-none select-none italic group-hover:text-gold/10 transition-all duration-700">O</div>
+              <div className="flex justify-between items-center mb-10 pb-6 border-b border-white/5">
+                <h2 className="text-3xl font-serif text-white">近期訂單 / Recent Orders</h2>
+                <Link href="/account/orders" className="text-gold text-[10px] tracking-[3px] uppercase font-bold hover:text-white transition-colors">查看全部 →</Link>
+              </div>
+              
+              <div className="py-20 text-center border border-dashed border-white/10 rounded-sm">
+                <p className="text-[#5a5650] italic font-light mb-8">目前尚無訂單紀錄。</p>
+                <Link href="/shop" className="text-gold text-[10px] tracking-[4px] uppercase font-bold border-b border-gold/30 pb-2 hover:text-white transition-colors">
+                  開始購物 / START SHOPPING
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
