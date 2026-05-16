@@ -1,37 +1,46 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond, Outfit } from "next/font/google";
-import Link from "next/link";
+import { Cormorant_Garamond, Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import { CartProvider } from "@/components/CartProvider";
 import Header from "@/components/layout/Header";
+import { CartProvider } from "@/components/CartProvider";
 import Preloader from "@/components/ui/Preloader";
 import { auth } from "@/auth";
+import Link from "next/link";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const cormorant = Cormorant_Garamond({ 
-  variable: "--font-cormorant", 
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"]
+  variable: "--font-serif",
+  display: 'swap',
 });
-const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"] });
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-ui",
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: { default: "JC Mall | Premium Fashion", template: "%s | JC Mall" },
-  description: "Discover the latest premium fashion collections at JC Mall. Shop women, men, and accessories.",
-  metadataBase: new URL(process.env.NEXTAUTH_URL ?? "http://localhost:3000"),
-  robots: { index: true, follow: true },
-  openGraph: { siteName: "JC Mall", type: "website" },
+  title: "JC Mall | Premium Fashion Destination",
+  description: "Experience high-end fashion and sustainable luxury at JC Mall.",
 };
 
 export default async function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const session = await auth();
 
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${outfit.variable} h-full antialiased`} suppressHydrationWarning>
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${cormorant.variable} ${inter.variable} ${outfit.variable} font-sans antialiased bg-[#0a0a0a] text-white min-h-screen flex flex-col`}>
         <CartProvider>
           <Preloader />
           <Header session={session} />
@@ -45,7 +54,6 @@ export default async function RootLayout({
                   為追求卓越與永續工藝的您，提供超越時光的極致時尚單品。
                 </p>
                 <div className="flex gap-4">
-                  {/* Social Mocks */}
                   <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#9a958e] hover:border-gold hover:text-gold transition-all cursor-pointer">IG</div>
                   <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#9a958e] hover:border-gold hover:text-gold transition-all cursor-pointer">FB</div>
                   <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#9a958e] hover:border-gold hover:text-gold transition-all cursor-pointer">TW</div>
@@ -54,27 +62,27 @@ export default async function RootLayout({
               <div>
                 <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">購物探索 / SHOP</h4>
                 <ul className="space-y-4 text-[10px] tracking-[2px] font-ui font-bold text-[#5a5650] uppercase">
-                  <li><Link href="/shop/new-arrivals" className="hover:text-gold transition-all hover:pl-2 block">新品上市</Link></li>
+                  <li><Link href="/shop" className="hover:text-gold transition-all hover:pl-2 block">全部商品</Link></li>
                   <li><Link href="/shop/women" className="hover:text-gold transition-all hover:pl-2 block">女裝系列</Link></li>
                   <li><Link href="/shop/men" className="hover:text-gold transition-all hover:pl-2 block">男裝系列</Link></li>
                   <li><Link href="/shop/accessories" className="hover:text-gold transition-all hover:pl-2 block">精品配件</Link></li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">顧客服務 / SUPPORT</h4>
+                <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">品牌故事 / ABOUT</h4>
                 <ul className="space-y-4 text-[10px] tracking-[2px] font-ui font-bold text-[#5a5650] uppercase">
-                  <li><Link href="/about" className="hover:text-gold transition-all hover:pl-2 block">關於我們</Link></li>
+                  <li><Link href="/about" className="hover:text-gold transition-all hover:pl-2 block">我們的故事</Link></li>
+                  <li><Link href="/sustainability" className="hover:text-gold transition-all hover:pl-2 block">永續發展</Link></li>
                   <li><Link href="/contact" className="hover:text-gold transition-all hover:pl-2 block">聯繫我們</Link></li>
-                  <li><Link href="/faq" className="hover:text-gold transition-all hover:pl-2 block">常見問題</Link></li>
-                  <li><Link href="/shipping" className="hover:text-gold transition-all hover:pl-2 block">配送政策</Link></li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">聯繫資訊 / CONTACT</h4>
-                <ul className="space-y-4 text-xs font-light text-[#9a958e] leading-relaxed">
-                  <li><span className="text-white/40 block text-[10px] uppercase tracking-[2px] mb-1">Email</span> service@jcmall.com</li>
-                  <li><span className="text-white/40 block text-[10px] uppercase tracking-[2px] mb-1">Address</span> 123 Fashion Street, Central, HK</li>
-                  <li><span className="text-white/40 block text-[10px] uppercase tracking-[2px] mb-1">Hours</span> Mon - Fri: 10am - 7pm</li>
+                <h4 className="text-[10px] tracking-[4px] font-ui font-bold text-white uppercase mb-8">顧客服務 / SUPPORT</h4>
+                <ul className="space-y-4 text-[10px] tracking-[2px] font-ui font-bold text-[#5a5650] uppercase">
+                  <li><Link href="/faq" className="hover:text-gold transition-all hover:pl-2 block">常見問題</Link></li>
+                  <li><Link href="/shipping" className="hover:text-gold transition-all hover:pl-2 block">配送政策</Link></li>
+                  <li><Link href="/returns" className="hover:text-gold transition-all hover:pl-2 block">退換貨說明</Link></li>
+                  <li><Link href="/privacy" className="hover:text-gold transition-all hover:pl-2 block">隱私政策</Link></li>
                 </ul>
               </div>
             </div>
