@@ -1,0 +1,87 @@
+{
+  "Nav": {
+    "shop": "Shop",
+    "women": "Women",
+    "men": "Men",
+    "accessories": "Accessories",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "account": "Account"
+  },
+  "Hero": {
+    "slide1": {
+      "tag": "JC mall 2026 Collection",
+      "title": "TIMELESS ELEGANCE",
+      "subtitle": "Discover sustainable craftsmanship tailored for modern living.",
+      "cta": "Explore Collection"
+    },
+    "slide2": {
+      "tag": "Premium Cashmere",
+      "title": "ULTIMATE PURITY",
+      "subtitle": "Experience the perfect blend of Italian wool and luxury silk.",
+      "cta": "Shop Now"
+    },
+    "slide3": {
+      "tag": "New Arrivals",
+      "title": "REDEFINED MODERN",
+      "subtitle": "Merging minimalism with high-end couture craftsmanship.",
+      "cta": "View New Arrivals"
+    }
+  },
+  "Home": {
+    "marquee": {
+      "benefit1": "FREE GLOBAL SHIPPING",
+      "benefit2": "30-DAY RETURNS",
+      "benefit3": "SUSTAINABLE CRAFTSMANSHIP",
+      "benefit4": "100% ORGANIC MATERIALS"
+    },
+    "categories": {
+      "title": "Browse Categories",
+      "tag": "Selections"
+    },
+    "featured": {
+      "title": "Curated Pieces",
+      "tag": "Featured"
+    },
+    "philosophy": {
+      "tag": "Brand Philosophy",
+      "title": "Pure Craft, Sustainable Fashion",
+      "desc": "At JC mall, we don't follow trends. We insist on using the highest grade organic materials and collaborating with global master artisans to create timeless pieces that span generations. Every garment is a respect for the earth and a commitment to taste.",
+      "cta": "Our Commitment"
+    },
+    "services": {
+      "shipping": "Global Shipping",
+      "shippingDesc": "Expert delivery on all orders",
+      "returns": "30-Day Returns",
+      "returnsDesc": "Worry-free satisfaction guarantee",
+      "security": "Secure Payment",
+      "securityDesc": "SSL encrypted transactions",
+      "support": "Expert Support",
+      "supportDesc": "Dedicated 24/7 assistance"
+    }
+  },
+  "Shop": {
+    "title": "All Products",
+    "search": "Search products...",
+    "noResults": "No products found matching your search criteria.",
+    "returnAll": "Browse all products"
+  },
+  "Product": {
+    "selection": "JC mall Selection",
+    "freeShipping": "Free Shipping",
+    "viewDetails": "View Details",
+    "details": "Product Details",
+    "shipping": "Shipping & Returns"
+  },
+  "Cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is currently empty.",
+    "continue": "Continue Shopping",
+    "summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Proceed to Checkout"
+  }
+}

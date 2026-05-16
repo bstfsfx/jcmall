@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getProducts } from "@/app/actions/product";
+import { getProducts } from "@/actions/product";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000";

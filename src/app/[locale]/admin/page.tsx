@@ -1,4 +1,4 @@
-import { getProducts } from "@/app/actions/product";
+import { getProducts } from "@/actions/product";
 
 export default async function AdminDashboardPage() {
   const products = await getProducts();

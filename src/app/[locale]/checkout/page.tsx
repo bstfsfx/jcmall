@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { createOrder } from "@/app/actions/order";
+import { createOrder } from "@/actions/order";
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();

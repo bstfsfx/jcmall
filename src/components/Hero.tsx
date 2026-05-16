@@ -34,10 +34,10 @@ export default function Hero() {
       if (!containerRef.current) return;
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      
+
       const x = (clientX - innerWidth / 2) / 40;
       const y = (clientY - innerHeight / 2) / 40;
-      
+
       setMousePos({ x, y });
     };
 
@@ -53,58 +53,55 @@ export default function Hero() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative h-screen flex items-center justify-center bg-black overflow-hidden"
     >
       {/* Background Slides */}
       {SLIDES.map((slide, index) => (
-        <div 
+        <div
           key={index}
-          className={`absolute inset-0 z-0 transition-opacity duration-[1500ms] cubic-bezier(0.4, 0, 0.2, 1) ${
-            index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-          }`}
+          className={`absolute inset-0 z-0 transition-opacity duration-[1500ms] cubic-bezier(0.4, 0, 0.2, 1) ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+            }`}
           style={{ transitionProperty: 'opacity, transform' }}
         >
-          <img 
-            src={slide.image} 
+          <img
+            src={slide.image}
             alt={`Hero Slide ${index + 1}`}
-            className={`w-full h-full object-cover transition-transform duration-[10000ms] linear ${
-              index === currentSlide ? 'scale-100' : 'scale-110'
-            }`}
+            className={`w-full h-full object-cover transition-transform duration-[10000ms] linear ${index === currentSlide ? 'scale-100' : 'scale-110'
+              }`}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/80" />
         </div>
       ))}
-      
+
       {/* Content with Parallax Effect */}
-      <div 
+      <div
         className="relative z-10 text-center text-white px-4 transition-transform duration-300 ease-out flex flex-col items-center"
         style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
       >
         <div className="overflow-hidden">
-          <p className={`text-[10px] tracking-[0.6em] uppercase mb-6 opacity-0 font-ui transition-all duration-800 delay-200 ${
-            currentSlide >= 0 ? 'opacity-80 translate-y-0' : 'translate-y-full'
-          }`} key={`tag-${currentSlide}`}>
+          <p className={`text-[10px] tracking-[0.6em] uppercase mb-6 opacity-0 font-ui transition-all duration-800 delay-200 ${currentSlide >= 0 ? 'opacity-80 translate-y-0' : 'translate-y-full'
+            }`} key={`tag-${currentSlide}`}>
             {SLIDES[currentSlide].tag}
           </p>
         </div>
-        
-        <h1 
+
+        <h1
           key={`title-${currentSlide}`}
           className="text-6xl md:text-9xl font-serif mb-10 tracking-widest drop-shadow-2xl transition-all duration-800 delay-400 opacity-0 translate-y-8 animate-[fadeIn_0.8s_0.4s_forwards] hover:text-gold hover:tracking-[0.3em] hover:text-shadow-premium"
           style={{ textShadow: `${-mousePos.x / 2}px ${-mousePos.y / 2}px 30px rgba(201,169,110,0.3)` }}
         >
           {SLIDES[currentSlide].title}
         </h1>
-        
-        <p 
+
+        <p
           key={`sub-${currentSlide}`}
           className="text-sm md:text-base mb-12 max-w-xl mx-auto font-light tracking-[0.1em] leading-loose opacity-0 translate-y-8 animate-[fadeIn_0.8s_0.6s_forwards]"
         >
           {SLIDES[currentSlide].subtitle}
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 translate-y-8 animate-[fadeIn_0.8s_0.8s_forwards]">
           <Link
             href="/shop"
@@ -127,9 +124,8 @@ export default function Hero() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-500 ${
-              index === currentSlide ? 'bg-gold scale-150 shadow-[0_0_15px_rgba(201,169,110,0.8)]' : 'bg-white/20'
-            }`}
+            className={`w-2 h-2 rounded-full transition-all duration-500 ${index === currentSlide ? 'bg-gold scale-150 shadow-[0_0_15px_rgba(201,169,110,0.8)]' : 'bg-white/20'
+              }`}
           />
         ))}
       </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProductBySlug } from "@/app/actions/product";
+import { getProductBySlug } from "@/actions/product";
 import ProductForm from "@/components/ProductForm";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 

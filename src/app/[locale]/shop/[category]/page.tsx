@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProductsByCategory, getCategoryBySlug } from "@/app/actions/product";
+import { getProductsByCategory, getCategoryBySlug } from "@/actions/product";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export default async function CategoryPage({

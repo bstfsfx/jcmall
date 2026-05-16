@@ -2,16 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import CartIcon from '@/components/CartIcon';
+import { useTranslations } from 'next-intl';
 
 interface HeaderProps {
   session: any;
+  locale: string;
 }
 
-export default function Header({ session }: HeaderProps) {
+export default function Header({ session, locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const t = useTranslations('Nav');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,13 +26,22 @@ export default function Header({ session }: HeaderProps) {
   }, []);
 
   const navLinks = [
-    { name: 'SHOP', href: '/shop' },
-    { name: 'WOMEN', href: '/shop/women' },
-    { name: 'MEN', href: '/shop/men' },
-    { name: 'ACCESSORIES', href: '/shop/accessories' },
-    { name: 'ABOUT', href: '/about' },
-    { name: 'CONTACT', href: '/contact' },
+    { name: t('shop').toUpperCase(), href: `/${locale}/shop` },
+    { name: t('women').toUpperCase(), href: `/${locale}/shop/women` },
+    { name: t('men').toUpperCase(), href: `/${locale}/shop/men` },
+    { name: t('accessories').toUpperCase(), href: `/${locale}/shop/accessories` },
+    { name: t('about').toUpperCase(), href: `/${locale}/about` },
+    { name: t('contact').toUpperCase(), href: `/${locale}/contact` },
   ];
+
+  const switchLanguage = (newLocale: string) => {
+    // Current pathname example: /en/shop or /zh/shop
+    // Replace the first part of the path with the new locale
+    const segments = pathname.split('/');
+    segments[1] = newLocale;
+    const newPath = segments.join('/');
+    router.push(newPath);
+  };
 
   return (
     <header 
@@ -40,13 +53,13 @@ export default function Header({ session }: HeaderProps) {
     >
       <div className="container mx-auto px-8 flex items-center justify-between">
         <Link 
-          href="/" 
+          href={`/${locale}`} 
           className="text-2xl md:text-3xl font-serif font-light tracking-[0.4em] transition-all hover:text-gold text-white"
         >
           JC MALL
         </Link>
         
-        <nav className="hidden lg:flex gap-12">
+        <nav className="hidden lg:flex gap-10">
           {navLinks.map((link) => (
             <Link 
               key={link.name}
@@ -64,22 +77,37 @@ export default function Header({ session }: HeaderProps) {
         </nav>
         
         <div className="flex items-center gap-6">
-          <Link href="/shop" className="text-white hover:text-gold transition-colors p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <div className="flex gap-4 border-r border-white/10 pr-6 mr-2">
+            <button 
+              onClick={() => switchLanguage('en')}
+              className={`text-[10px] tracking-[2px] font-bold transition-all ${locale === 'en' ? 'text-gold' : 'text-[#5a5650] hover:text-white'}`}
+            >
+              EN
+            </button>
+            <button 
+              onClick={() => switchLanguage('zh')}
+              className={`text-[10px] tracking-[2px] font-bold transition-all ${locale === 'zh' ? 'text-gold' : 'text-[#5a5650] hover:text-white'}`}
+            >
+              ZH
+            </button>
+          </div>
+
+          <Link href={`/${locale}/shop`} className="text-white hover:text-gold transition-colors p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           </Link>
           {session?.user ? (
             <Link 
-              href="/account" 
+              href={`/${locale}/account`} 
               className="text-[10px] tracking-[0.3em] font-ui font-bold text-[#9a958e] hover:text-white transition-colors"
             >
-              {session.user.name?.split(" ")[0]?.toUpperCase() ?? "ACCOUNT"}
+              {session.user.name?.split(" ")[0]?.toUpperCase() ?? t('account').toUpperCase()}
             </Link>
           ) : (
             <Link 
-              href="/login" 
+              href={`/${locale}/login`} 
               className="text-[10px] tracking-[0.3em] font-ui font-bold text-[#9a958e] hover:text-white transition-colors"
             >
-              SIGN IN
+              {t('signIn').toUpperCase()}
             </Link>
           )}
           <div className="text-white hover:text-gold transition-colors">

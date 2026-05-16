@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { registerUser } from "@/app/actions/auth";
+import { registerUser } from "@/actions/auth";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 export default function RegisterPage() {

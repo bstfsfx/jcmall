@@ -1,0 +1,87 @@
+{
+  "Nav": {
+    "shop": "選購",
+    "women": "女裝",
+    "men": "男裝",
+    "accessories": "配件",
+    "about": "關於我們",
+    "contact": "聯繫我們",
+    "signIn": "登入",
+    "account": "會員中心"
+  },
+  "Hero": {
+    "slide1": {
+      "tag": "JC mall 2026 系列",
+      "title": "永恆優雅 / ELEGANCE",
+      "subtitle": "探索為現代生活量身打造的永續工藝服飾。",
+      "cta": "探索系列"
+    },
+    "slide2": {
+      "tag": "頂級喀什米爾",
+      "title": "極致柔順 / PURE",
+      "subtitle": "感受義大利羊毛與奢華絲綢的完美結合。",
+      "cta": "立即選購"
+    },
+    "slide3": {
+      "tag": "新品上市",
+      "title": "重新定義 / MODERN",
+      "subtitle": "將極簡主義與高級訂製工藝完美融為一體。",
+      "cta": "查看新品"
+    }
+  },
+  "Home": {
+    "marquee": {
+      "benefit1": "全球免運配送 / FREE GLOBAL SHIPPING",
+      "benefit2": "30天無憂鑑賞期 / 30-DAY RETURNS",
+      "benefit3": "永續工藝承諾 / SUSTAINABLE CRAFTSMANSHIP",
+      "benefit4": "100% 有機材質 / 100% ORGANIC MATERIALS"
+    },
+    "categories": {
+      "title": "探索分類",
+      "tag": "Selections"
+    },
+    "featured": {
+      "title": "精選單品",
+      "tag": "Featured"
+    },
+    "philosophy": {
+      "tag": "Brand Philosophy",
+      "title": "純粹工藝，永續時尚",
+      "desc": "在 JC mall，我們不隨波逐流。我們堅持選用最高等級的有機材質，並與全球頂尖工匠合作，打造能夠跨越世代的經典單品。每一件服飾都是對地球的尊重，也是對品味的堅持。",
+      "cta": "了解我們的承諾"
+    },
+    "services": {
+      "shipping": "全球免運",
+      "shippingDesc": "所有訂單均享專業配送",
+      "returns": "30天退換",
+      "returnsDesc": "無憂售後保障服務",
+      "security": "安全支付",
+      "securityDesc": "SSL加密保護交易",
+      "support": "專屬客服",
+      "supportDesc": "24/7 全天候支援"
+    }
+  },
+  "Shop": {
+    "title": "全部商品",
+    "search": "搜尋商品...",
+    "noResults": "找不到與您的搜尋條件相符的商品。",
+    "returnAll": "瀏覽所有商品"
+  },
+  "Product": {
+    "selection": "JC mall Selection",
+    "freeShipping": "免運配送",
+    "viewDetails": "查看詳情",
+    "details": "商品詳情",
+    "shipping": "配送與退換"
+  },
+  "Cart": {
+    "title": "您的購物車",
+    "empty": "您的購物車目前是空的。",
+    "continue": "繼續選購商品",
+    "summary": "結帳摘要",
+    "subtotal": "小計",
+    "shipping": "配送",
+    "total": "總計",
+    "checkout": "前往結帳"
+  }
+}
