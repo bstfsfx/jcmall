@@ -3,6 +3,7 @@
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
+import { signIn } from '@/auth';
 
 export async function registerUser(formData: FormData) {
   const email = formData.get('email') as string;
@@ -37,5 +38,5 @@ export async function registerUser(formData: FormData) {
     throw new Error('Failed to register user');
   }
 
-  redirect('/login');
+  await signIn("credentials", { email, password, redirectTo: "/en/account" });
 }
