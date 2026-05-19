@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signIn } from "@/auth";
+import { loginUser } from "@/actions/login";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { useTranslations, useLocale } from "next-intl";
 
@@ -22,10 +22,7 @@ export default function LoginPage() {
               <div className="w-12 h-[1px] bg-gold mx-auto mt-6 opacity-40" />
             </div>
             
-            <form className="mt-8 space-y-8 relative z-10" action={async (formData) => {
-              'use server';
-              await signIn("credentials", formData);
-            }}>
+            <form action={loginUser} className="mt-8 space-y-8 relative z-10">
               <input type="hidden" name="redirectTo" value={`/${locale}/account`} />
               <div className="space-y-6">
                 <div className="flex flex-col gap-3">
