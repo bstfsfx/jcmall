@@ -64,7 +64,7 @@ export default function Header({ session, locale }: HeaderProps) {
             <Link 
               key={link.name}
               href={link.href} 
-              className={`text-[10px] tracking-[0.4em] font-ui font-bold transition-all hover:text-white relative group ${
+              className={`text-xs tracking-[0.3em] font-ui font-bold transition-all hover:text-white relative group ${
                 pathname === link.href ? 'text-gold' : 'text-[#9a958e]'
               }`}
             >
