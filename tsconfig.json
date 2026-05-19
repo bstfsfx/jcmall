@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "next-intl/config": ["./src/i18n/request.ts"]
     }
   },
   "include": [
