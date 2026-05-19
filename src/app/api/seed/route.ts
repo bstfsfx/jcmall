@@ -1,13 +1,25 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 /**
  * POST /api/seed
- * Seeds the database with initial categories and products.
+ * Seeds the database with initial categories, products, and a test user.
  * Protect this endpoint in production (remove or add auth guard).
  */
 export async function POST() {
   try {
+    // Create test user
+    const hashedPassword = await bcrypt.hash("test1234", 12);
+    await prisma.user.upsert({
+      where: { email: "test@example.com" },
+      update: { password: hashedPassword },
+      create: {
+        email: "test@example.com",
+        password: hashedPassword,
+        name: "Test User",
+      },
+    });
     // Create categories
     const [women, men, accessories, newArrivals] = await Promise.all([
       prisma.category.upsert({
