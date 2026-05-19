@@ -81,7 +81,7 @@ export default function Hero() {
         style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
       >
         <div className="overflow-hidden">
-          <p className={`text-[10px] tracking-[0.6em] uppercase mb-6 opacity-0 font-ui transition-all duration-800 delay-200 ${currentSlide >= 0 ? 'opacity-80 translate-y-0' : 'translate-y-full'
+          <p className={`text-xs tracking-[0.5em] uppercase mb-6 opacity-0 font-ui transition-all duration-800 delay-200 ${currentSlide >= 0 ? 'opacity-80 translate-y-0' : 'translate-y-full'
             }`} key={`tag-${currentSlide}`}>
             {SLIDES[currentSlide].tag}
           </p>
@@ -105,13 +105,13 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 translate-y-8 animate-[fadeIn_0.8s_0.8s_forwards]">
           <Link
             href="/shop"
-            className="inline-block bg-gold text-black px-12 py-5 text-[10px] font-bold tracking-[0.4em] hover:bg-gold-light transition-all duration-300 shadow-2xl uppercase group"
+            className="inline-block bg-gold text-black px-12 py-5 text-xs font-bold tracking-[0.4em] hover:bg-gold-light transition-all duration-300 shadow-2xl uppercase group"
           >
             Shop Collection
           </Link>
           <Link
             href="/shop/new-arrivals"
-            className="inline-block border border-white/40 text-white px-12 py-5 text-[10px] font-bold tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-300 uppercase backdrop-blur-sm"
+            className="inline-block border border-white/40 text-white px-12 py-5 text-xs font-bold tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-300 uppercase backdrop-blur-sm"
           >
             Explore More <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
           </Link>
